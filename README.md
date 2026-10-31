@@ -1,0 +1,73 @@
+# Agent configuration
+
+Brendan's shared agent instructions, skills, and personal scripts. Edit the
+files in this repository and use Git to track changes over time.
+
+## Contents
+
+- `instructions/AGENTS.md`: shared personal instructions, initially copied from
+  the existing Codex configuration.
+- `skills/`: reusable skills. `unslop` comes from Cursor's pstack plugin; its
+  source and license are recorded alongside it.
+- `scripts/`: personal command-line tools. Executable files are installed into
+  `$HOME/.local/bin`.
+- `config/`: selected agent settings and setup notes.
+- `install.sh`: creates links from agent configuration locations to this repo.
+
+## Install
+
+Clone this private repository using your authenticated GitHub account:
+
+```bash
+gh repo clone brendan-dewberry/agent-config "$HOME/Repo/agent-config"
+cd "$HOME/Repo/agent-config"
+./install.sh --dry-run
+./install.sh
+```
+
+If files already occupy an installation path, the installer stops before
+changing any files. To back them up and replace them with links:
+
+```bash
+./install.sh --dry-run --backup
+./install.sh --backup
+```
+
+Backups are stored under `$HOME/.local/state/agent-config/backups/`, preserving
+the original relative paths. The installer prints the backup directory.
+Existing unrelated skills stay in their own directories.
+
+## Installed paths
+
+| Path | Repository source |
+| --- | --- |
+| `$HOME/.agents/AGENTS.md` | `instructions/AGENTS.md` |
+| `$HOME/.codex/AGENTS.md` | `instructions/AGENTS.md` |
+| `$HOME/.claude/CLAUDE.md` | `instructions/AGENTS.md` |
+| `$HOME/.agents/skills/<name>` | `skills/<name>/` |
+| `$HOME/.claude/skills/<name>` | `skills/<name>/` |
+| `$HOME/.cursor/skills/<name>` | `skills/<name>/` |
+| `$HOME/.local/bin/<name>` | Executable files in `scripts/` |
+
+Codex discovers skills through `.agents/skills`. Claude and Cursor get their
+own skill links. For Cursor instructions, follow `config/README.md`.
+Start a new chat after changing instructions so the agent loads the new content.
+
+## Make changes
+
+Edit the original files in this repository. Existing links expose the edits
+immediately; run `./install.sh` again after adding a skill or executable script.
+Running the installer again leaves links that already point here in place.
+
+Review and commit changes, then push them to GitHub. On another machine, pull
+the repository and rerun the installer. This is an explicit Git workflow.
+
+The initial instructions preserve the existing Redo preferences and absolute
+paths. Review those paths if using a different home directory or checkout.
+Personal configuration can be adapted here without adding files to Redo.
+
+## Restore an existing file
+
+Remove the installed link at the specific path you want to restore, then move
+that path's original file from the printed backup directory back into place.
+Keep the repository at its current location while its links are installed.

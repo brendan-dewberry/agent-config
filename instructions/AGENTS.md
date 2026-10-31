@@ -1,0 +1,76 @@
+## Writing style
+
+At the start of each chat, read the
+[unslop skill](/Users/brendan/.agents/skills/unslop/SKILL.md) and apply it to all
+prose you write, including progress updates, final replies, walkthroughs,
+documents, merge request descriptions, and commit messages. Apply its editing
+rules before delivering the text.
+
+Preserve facts, technical detail, meaningful uncertainty, exact quotations, and
+code identifiers. Follow the user's requested tone and format. Never sacrifice
+clarity merely to shorten the text.
+
+## Redo Development Workflow
+
+For Redo development tasks in either local checkout, read and follow
+[Brendan's agentic development workflow](/Users/brendan/Repo/redo/docs/agentic-development-workflow.local.md).
+Use the active checkout's `.agents/skills/architecture-review/SKILL.md` for
+planning and implementation walkthroughs. Honor approvals and environment
+choices already given in the conversation. Include the applicable workflow in
+cloud handoff briefs because this personal file is Git-ignored.
+
+## Merge Request Links
+
+- When sharing Redo merge requests with Brendan, use their LGTM links instead
+  of GitLab links in replies, walkthroughs, and review artifacts.
+- Resolve the actual LGTM URL for the MR; do not invent a URL pattern.
+
+## Git Checkout Safety
+
+- Inspect the checkout's branch and status before working, and preserve
+  existing changes.
+- Do not stash, reset, clean, or switch away from uncommitted changes without
+  my explicit direction.
+
+## RPC File Organization
+
+- Keep one RPC handler per server handler file, with the file named for that
+  RPC. Do not group several RPC handlers in a domain-themed handler module.
+- Keep each RPC schema definition in its own schema file as well. Shared
+  helpers belong in a separate service or utility module and may be reused by
+  the individual handlers.
+
+## Function Organization
+
+- Keep each function focused on one responsibility. A workflow function should
+  read as a short sequence of named domain steps.
+- Extract cohesive decisions or operations into helpers with names that explain
+  their purpose; avoid both long mixed-responsibility functions and tiny
+  pass-through wrappers.
+- Preserve important boundaries such as transactions: keep related reads and
+  writes explicit, and pass the transaction into helpers that participate in
+  it.
+- Prefer early returns for terminal cases and group related inputs in a named
+  object when a helper needs several values.
+
+## Repository Modules
+
+- Keep database writes in repository modules dedicated to the table they own.
+  Reuse an existing repository before adding one. Keep business rules and
+  multi-table workflow coordination in services, passing the same transaction
+  into participating repository methods.
+- Give repository methods concise action names. Let the module identify the
+  entity instead of repeating it in every method: `createSession`, `getSession`,
+  and `updateReceivingSource`, rather than `createItemProcessingSession`.
+- Import repositories directly as module namespaces with descriptive PascalCase
+  names, for example:
+
+  ```ts
+  import * as ItemProcessingRepo from "./item-processing-repo";
+
+  await ItemProcessingRepo.createSession(input, txn);
+  ```
+
+- Export individual functions from repository modules. Prefer static member
+  calls (`ItemProcessingRepo.createSession`) over dynamically indexing, spreading,
+  or passing the entire namespace, so bundlers can identify used exports.
