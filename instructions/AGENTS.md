@@ -28,11 +28,12 @@ their glossary and ADR references to this personal documentation root.
 ## Redo Development Workflow
 
 For Redo development tasks in either local checkout, read and follow
-[Brendan's agentic development workflow](/Users/brendan/Repo/redo/docs/agentic-development-workflow.local.md).
+[Brendan's agentic development workflow](/Users/brendan/.agents/workflows/redo-development.md).
 Use the active checkout's `.agents/skills/architecture-review/SKILL.md` for
 planning and implementation walkthroughs. Honor approvals and environment
 choices already given in the conversation. Include the applicable workflow in
-cloud handoff briefs because this personal file is Git-ignored.
+cloud handoff briefs because the Redo repository does not contain this personal
+workflow.
 
 ## Merge Request Links
 

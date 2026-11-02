@@ -7,6 +7,7 @@ files in this repository and use Git to track changes over time.
 
 - `instructions/AGENTS.md`: shared personal instructions, initially copied from
   the existing Codex configuration.
+- `workflows/redo-development.md`: canonical personal Redo development workflow.
 - `skills/`: reusable skills. Each imported skill includes its source and
   license so upstream updates can be reviewed deliberately.
 - `scripts/`: personal command-line tools. Executable files are installed into
@@ -66,6 +67,7 @@ Existing unrelated skills stay in their own directories.
 | `$HOME/.agents/AGENTS.md` | `instructions/AGENTS.md` |
 | `$HOME/.codex/AGENTS.md` | `instructions/AGENTS.md` |
 | `$HOME/.claude/CLAUDE.md` | `instructions/AGENTS.md` |
+| `$HOME/.agents/workflows/redo-development.md` | `workflows/redo-development.md` |
 | `$HOME/.agents/skills/<name>` | `skills/<name>/` |
 | `$HOME/.claude/skills/<name>` | `skills/<name>/` |
 | `$HOME/.cursor/skills/<name>` | `skills/<name>/` |
@@ -74,6 +76,17 @@ Existing unrelated skills stay in their own directories.
 Codex discovers skills through `.agents/skills`. Claude and Cursor get their
 own skill links. For Cursor instructions, follow `config/README.md`.
 Start a new chat after changing instructions so the agent loads the new content.
+
+If `$HOME/Repo/redo` is a checkout, the installer also links its existing
+`docs/agentic-development-workflow.local.md` path to the canonical workflow. It
+ensures that path is locally ignored, refuses to replace a tracked file, and
+preserves an existing local file when `--backup` is supplied. If Redo is absent,
+it only installs the shared workflow under `.agents/workflows`.
+
+Edit `workflows/redo-development.md` here to maintain the workflow. Its
+repository-relative paths refer to the active Redo checkout, so it continues
+using that checkout's managed skills. Include the applicable workflow in cloud
+handoff briefs because Redo's Git history does not carry it.
 
 ## Make changes
 
