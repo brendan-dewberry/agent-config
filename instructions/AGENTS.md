@@ -10,6 +10,21 @@ Preserve facts, technical detail, meaningful uncertainty, exact quotations, and
 code identifiers. Follow the user's requested tone and format. Never sacrifice
 clarity merely to shorten the text.
 
+## Personal domain documentation
+
+Before investigating, planning, or implementing in a Git repository, check
+`<repo-root>/.agent-notes/domain-modeling/` for personal domain documentation.
+Read these paths explicitly because Git-aware searches may skip ignored files.
+If present, read `GLOSSARY-MAP.md` and the glossaries it identifies as relevant,
+or `GLOSSARY.md` for a single context, plus decision records relevant to the task
+under `docs/adr/` or the mapped context directories. If absent, proceed silently.
+
+Use the glossary's terminology and consider recorded decisions. Verify factual
+claims against current code, and surface conflicts or stale notes rather than
+treating them as current behavior. Keep these notes local and ignored, outside
+project commits and merge requests. When using Matt Pocock's skills, resolve
+their glossary and ADR references to this personal documentation root.
+
 ## Redo Development Workflow
 
 For Redo development tasks in either local checkout, read and follow
