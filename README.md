@@ -27,8 +27,11 @@ files in this repository and use Git to track changes over time.
 Use `$grill-me` or `$grill-with-docs` in Codex. In Claude Code and Cursor,
 select the matching skill from the slash-command menu. Both entry points are
 explicitly invoked; their dependencies retain the upstream activation settings.
-`grill-with-docs` can create or update `GLOSSARY.md` and architectural decision
-records in the project where it runs.
+`grill-with-docs` stores personal glossaries and architectural decision records
+under `<repo-root>/.agent-notes/domain-modeling/`. Before writing, it adds
+`/.agent-notes/` to the repository's local `.git/info/exclude` and verifies the
+output paths are ignored. These notes stay out of project commits and merge
+requests. Existing tracked team documentation remains reference material.
 
 The skills are editable copies, linked from this repository. They do not update
 themselves from upstream. Each `SOURCE.md` records the imported revision.

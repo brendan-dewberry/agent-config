@@ -1,5 +1,10 @@
 # GLOSSARY.md Format
 
+All paths in this format are relative to the personal documentation root,
+`<repo-root>/.agent-notes/domain-modeling/`. Follow the local exclusion policy
+in `SKILL.md` before writing. Existing tracked team documentation is reference
+material; write personal definitions in the ignored documentation root.
+
 ## Structure
 
 ```md
@@ -31,18 +36,19 @@ _Avoid_: Client, buyer, account
 
 ## Single vs multi-context repos
 
-**Single context (most repos):** One `GLOSSARY.md` at the repo root.
+**Single context (most projects):** One `GLOSSARY.md` at the documentation root.
 
-**Multiple contexts:** A `GLOSSARY-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
+**Multiple contexts:** A `GLOSSARY-MAP.md` at the documentation root lists the
+contexts, where they live, and how they relate to each other:
 
 ```md
 # Glossary Map
 
 ## Contexts
 
-- [Ordering](./src/ordering/GLOSSARY.md): receives and tracks customer orders
-- [Billing](./src/billing/GLOSSARY.md): generates invoices and processes payments
-- [Fulfillment](./src/fulfillment/GLOSSARY.md): manages warehouse picking and shipping
+- [Ordering](./contexts/ordering/GLOSSARY.md): receives and tracks customer orders
+- [Billing](./contexts/billing/GLOSSARY.md): generates invoices and processes payments
+- [Fulfillment](./contexts/fulfillment/GLOSSARY.md): manages warehouse picking and shipping
 
 ## Relationships
 

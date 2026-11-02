@@ -7,6 +7,13 @@ Imported from Matt Pocock's skills repository on 2026-11-02.
 - Upstream SKILL.md Git blob SHA: `a4438c6879c517d1a08e2b5fbca049b632688dfe`
 - License: MIT, included in `LICENSE`.
 
-The skill and its bundled references and agent metadata are unchanged from the
-pinned upstream revision. Updates are deliberate: review upstream changes before
-importing them, and record intentional local changes here.
+Local changes on 2026-11-02:
+
+- Store generated documentation under `.agent-notes/domain-modeling/` and
+  require a local Git exclusion before writing.
+- Keep generated notes out of commits and merge requests. Read tracked team
+  documentation as references while capturing personal additions locally.
+- Align the glossary and ADR formats with this documentation root.
+
+Agent metadata is unchanged. Review upstream updates against these local changes
+before importing a new revision.

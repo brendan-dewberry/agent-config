@@ -7,6 +7,11 @@ Imported from Matt Pocock's skills repository on 2026-11-02.
 - Upstream SKILL.md Git blob SHA: `62b9efb6f991d1b229adee7506962f13ced0c499`
 - License: MIT, included in `LICENSE`.
 
-The skill and its bundled references and agent metadata are unchanged from the
-pinned upstream revision. Updates are deliberate: review upstream changes before
-importing them, and record intentional local changes here.
+Local changes on 2026-11-02:
+
+- Make the generated documentation location and local Git exclusion explicit.
+- Support agents that load dependency instructions by reading their files
+  instead of invoking a Skill tool.
+
+Agent metadata is unchanged. Review upstream updates against these local changes
+before importing a new revision.
