@@ -1,6 +1,6 @@
 # Brendan's agentic development workflow
 
-Personal workflow, agreed October 3 and updated October 19, 2026.
+Personal workflow, agreed October 3 and updated November 2, 2026.
 This canonical document is versioned in Brendan's private `agent-config`
 repository and applies to both Redo checkouts. It is installed at
 `$HOME/.agents/workflows/redo-development.md`. The previous Redo-local path is
@@ -58,6 +58,9 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
 - Provide a working demonstration for hands-on approval and review the final
   diff and affected callers. Plan approval, behavior approval, and "done" do
   not authorize heavy CI gates, merge, deployment, or production writes.
+- Return screenshots or a short demo recording for user-visible changes, with
+  the tested SHA, runtime, fixtures, and steps. Codex inspects the evidence and
+  attaches it to the MR as described below.
 - Keep MR descriptions concise and preserve unrelated checkout work. Do not
   spawn helper agents unless the user or an applicable instruction requests it.
 
@@ -82,8 +85,9 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
    watcher. Prove changed paths live and independently inspect the returned
    evidence. Apply suggested patches locally and push completed batches.
 5. **Approve behavior and review implementation.** Provide verified links and
-   test steps for Brendan. Update the same HTML walkthrough with actual code,
-   deviations, evidence, and gaps. Fix findings and revalidate affected paths.
+   test steps for Brendan. Attach validation evidence directly to the MR.
+   Update the same HTML walkthrough with actual code, deviations, evidence,
+   and gaps. Fix findings and revalidate affected paths.
 6. **Complete final cloud checks when Brendan says done.** Use the same buddy
    for any remaining touched-package type checks, lint, generation, regression
    proof, and required tests. Cursor returns patches under the personal
@@ -139,6 +143,28 @@ MR, tested/source SHAs, preview availability, status, and next action.
 Do not improvise validation prerequisites or fabricate a pass. Cloud failures
 must include reproducible entry points, expected/actual results, logs, and
 file/line evidence so Codex can correct the code locally.
+
+## MR validation evidence
+
+Before handing off an MR for review, put the validation results and evidence
+on the MR itself. For user-visible changes, upload inspected screenshots or a
+short demo recording and embed them in the description or a clearly linked MR
+comment. Use before/after captures with the same input when they help explain
+the change. Label mock screenshots as mocks. Evidence kept only in chat, local
+files, or cloud-agent artifacts is not a completed review handoff.
+
+Keep the description concise. Include the tested SHA, runtime, relevant
+fixtures, commands and results, expected versus observed behavior, and remaining
+gaps. Put longer evidence in a linked comment. Label older evidence with its
+actual revision and explain any reuse; never imply it was rerun on the current
+head. Verify that the saved MR renders the attachments and links correctly.
+
+For a hands-on demo, include verified access instructions and reproduction
+steps without credentials. Record when access was last verified. Keep durable
+screenshots or a recording on the MR even when a live demo is available, and
+label expired or unverified access clearly. Keep the personal HTML walkthrough
+local unless Brendan asks to publish it. Posting evidence does not authorize
+CI gates, ready state, merge, or deployment.
 
 ## Architecture walkthrough
 
