@@ -7,12 +7,31 @@ files in this repository and use Git to track changes over time.
 
 - `instructions/AGENTS.md`: shared personal instructions, initially copied from
   the existing Codex configuration.
-- `skills/`: reusable skills. `unslop` comes from Cursor's pstack plugin; its
-  source and license are recorded alongside it.
+- `skills/`: reusable skills. Each imported skill includes its source and
+  license so upstream updates can be reviewed deliberately.
 - `scripts/`: personal command-line tools. Executable files are installed into
   `$HOME/.local/bin`.
 - `config/`: selected agent settings and setup notes.
 - `install.sh`: creates links from agent configuration locations to this repo.
+
+## Installed skills
+
+| Skill | Purpose | Dependencies |
+| --- | --- | --- |
+| `unslop` | Remove AI writing patterns from prose | None |
+| `grill-me` | Interview you to sharpen a plan or design | `grilling` |
+| `grill-with-docs` | Interview you while capturing glossary terms and architectural decisions | `grilling`, `domain-modeling` |
+| `grilling` | Shared interview procedure | None |
+| `domain-modeling` | Clarify domain terminology and document decisions | Bundled glossary and ADR formats |
+
+Use `$grill-me` or `$grill-with-docs` in Codex. In Claude Code and Cursor,
+select the matching skill from the slash-command menu. Both entry points are
+explicitly invoked; their dependencies retain the upstream activation settings.
+`grill-with-docs` can create or update `GLOSSARY.md` and architectural decision
+records in the project where it runs.
+
+The skills are editable copies, linked from this repository. They do not update
+themselves from upstream. Each `SOURCE.md` records the imported revision.
 
 ## Install
 
