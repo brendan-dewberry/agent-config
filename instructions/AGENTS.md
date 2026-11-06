@@ -10,6 +10,12 @@ Preserve facts, technical detail, meaningful uncertainty, exact quotations, and
 code identifiers. Follow the user's requested tone and format. Never sacrifice
 clarity merely to shorten the text.
 
+Read each applicable skill once per context, including unslop. A follow-up
+message in the same chat does not require another read. Reuse the loaded
+instructions until the file changes or they are lost through compaction.
+Preserve loaded skill names and essential guidance in compaction and handoff
+summaries.
+
 ## Task scope
 
 - Keep changes tied to the requested outcome and its acceptance requirements.
