@@ -10,6 +10,22 @@ Preserve facts, technical detail, meaningful uncertainty, exact quotations, and
 code identifiers. Follow the user's requested tone and format. Never sacrifice
 clarity merely to shorten the text.
 
+## Task scope
+
+- Keep changes tied to the requested outcome and its acceptance requirements.
+  Trace and reuse existing behavior before adding new code or infrastructure.
+- Preserve the agreed owner of a workflow. An agent workflow change belongs in
+  its instructions, skills and existing tools unless a concrete capability gap
+  requires application or platform code. Do not duplicate that workflow in a
+  new controller, scheduler or state machine as an implementation convenience.
+- Necessary supporting changes must have a direct, explainable connection to
+  the task. Present broader behavior, ownership or architecture changes
+  separately and get agreement before implementing them. Adjacent cleanup,
+  generic hardening and future capabilities are separate work.
+- When the approach or scope narrows, remove the superseded code, dependencies,
+  tests and documentation. Do not retain them just because they were already
+  written. Review the final diff against the current request before delivery.
+
 ## Personal domain documentation
 
 Before investigating, planning, or implementing in a Git repository, check
