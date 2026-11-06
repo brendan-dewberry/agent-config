@@ -24,6 +24,7 @@ files in this repository and use Git to track changes over time.
 | `grill-with-docs` | Interview you while capturing glossary terms and architectural decisions | `grilling`, `domain-modeling` |
 | `grilling` | Shared interview procedure | None |
 | `domain-modeling` | Clarify domain terminology and document decisions | Bundled glossary and ADR formats |
+| `redo-agents-api` | Inspect and manage Redo Agents through its authenticated HTTP API | Local Redo Agents API key |
 
 Use `$grill-me` or `$grill-with-docs` in Codex. In Claude Code and Cursor,
 select the matching skill from the slash-command menu. Both entry points are

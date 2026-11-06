@@ -90,3 +90,12 @@ workflow.
 - Export individual functions from repository modules. Prefer static member
   calls (`ItemProcessingRepo.createSession`) over dynamically indexing, spreading,
   or passing the entire namespace, so bundlers can identify used exports.
+
+## Redo Agents API
+
+When investigating or managing agents at `agents.redo.builders`, load the
+`redo-agents-api` skill. Use the documented HTTP API and the local
+`REDO_AGENTS_API_KEY` or `~/.config/redo-agents/api-key` before reaching for the
+browser. A missing MCP connector does not mean the HTTP API is unavailable.
+Verify access with `GET /v2/me`; never print or log the key. Use the browser
+only for browser-only routes or when the key lacks the required access.
