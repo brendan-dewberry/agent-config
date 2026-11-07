@@ -13,6 +13,9 @@ Maintain one engineering plan through the task and update its readable view.
 Record an automated architecture verdict and rationale for these criteria:
 
 - Requirements and acceptance checks are specific enough to implement.
+- For incident fixes, acceptance checks reflect later triage corrections and
+  conflicting evidence. State which reported cases are covered and which remain
+  unproven.
 - Scope is bounded and existing implementations/callers have been researched.
 - The approach follows established patterns or explains the necessary deviation.
 - Relevant data, authorization, compatibility, retry and failure rules are clear.

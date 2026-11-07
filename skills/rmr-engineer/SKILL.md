@@ -88,6 +88,12 @@ human decision. Distinguish implementation, green CI, merge, deployment, actual
 feature exposure and cleanup. Completion requires the agreed release,
 observation and cleanup requirements to be verified.
 
+Post a short Linear implementation update on pickup and material stage changes,
+with the current stage, MR when available and next action. Reuse the local
+workflow's comment on resume; skip unchanged status polls. Verify the saved body
+and retain its comment ID in the task record. Use the authenticated identity
+without implying that it is the hosted RMR Engineer bot.
+
 When the candidate is ready for review, post the lifecycle's two-line request
 to #rmr-eng before waiting for approval. Keep proof and status details on the
 MR. Record the Slack permalink and candidate SHA privately. A local/chat update
