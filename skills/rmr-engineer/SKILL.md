@@ -48,6 +48,15 @@ rules in validation briefs. No new implementation agent, SDK, controller,
 database, ticket poller or service is required. Helm, hosted Work startup,
 ledger tools, lessons and publication are not dependencies of this local flow.
 
+Use an authenticated automation identity for MR authorship when available and
+verify the actual provider identity. Check the intended human's eligibility to
+approve early. If the author and approver are the same and the provider refuses
+approval, record that integration gap; do not simulate approval or change review
+rules. A Redo Agent display name alone does not authenticate a GitLab client.
+Managed bot credentials may require a supported local connection or a separately
+authorized credential. Do not export protected server credentials or broaden
+access as an implementation shortcut.
+
 ## Authority for this opt-in workflow
 
 The implementation assignment authorizes research, automatic architecture review,
