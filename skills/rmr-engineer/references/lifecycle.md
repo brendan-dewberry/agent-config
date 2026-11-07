@@ -132,6 +132,12 @@ Apply only targeting/expansion authorized by the release plan through existing
 granted controls. Retain change receipts and prior owned targeting for rollback.
 A disabled feature has not exercised the new path.
 
+Use Datadog as the default monitoring source. Reuse the actual alert query and
+verify cohort and correlation fields on both failure and activity records
+before filtering; those fields can differ. Use another UI or workflow history
+to answer a specific unresolved question. A separate Temporal login or credential
+is not a routine prerequisite when existing telemetry covers the release plan.
+
 Observe the planned population and signals over the agreed window. For a rare
 bug, absence of errors without a relevant execution is inconclusive. Distinguish
 regression proof from actual production exposure. Mark missing signals
