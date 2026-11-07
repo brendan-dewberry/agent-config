@@ -79,7 +79,10 @@ Present one review package containing:
 
 When the MR is waiting on a person, after its approval-independent checks pass
 and proof is attached, post to #rmr-eng, channel C0938J181B8, using the connected
-Slack tools. Keep the message to two lines:
+RMR Engineer bot, Patch. Verify the authenticated sender before posting. A
+personal Slack connector does not use Patch's identity. If the bot connection
+is unavailable locally, record the delivery gap; do not fall back to Brendan's
+account unless he explicitly chooses that fallback. Keep the message to two lines:
 
 1. The actual work/MR title, including the ticket identifier. Remove only an
    automatic Draft: prefix.
