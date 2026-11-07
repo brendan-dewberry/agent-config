@@ -47,6 +47,7 @@ and legitimate checks that depend on human approval.
 
 - Status: not ready / pending send / posted / blocked
 - Channel and existing review thread:
+- Assigned review owner and verified Slack ID:
 - Candidate SHA and plan revision:
 - Message timestamp, permalink and verified delivery:
 - Requested review action and remaining release blockers:

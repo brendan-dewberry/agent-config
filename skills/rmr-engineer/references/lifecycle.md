@@ -77,18 +77,24 @@ Present one review package containing:
 
 ### Required Slack review handoff
 
-After the candidate's approval-independent checks pass and evidence is attached
-to the MR, post a concise review request to #rmr-eng, channel C0938J181B8, using
-the connected Slack tools. Include the Linear ticket, verified LGTM MR link,
-behavior change, candidate SHA, proof/evidence links, CI status, feature-switch
-state and the review action needed. State remaining release or native approval
-blockers. Release-access setup does not delay an otherwise ready code review.
-Keep the human release gate and mandatory provider approvals explicit.
+When the MR is waiting on a person, after its approval-independent checks pass
+and proof is attached, post to #rmr-eng, channel C0938J181B8, using the connected
+Slack tools. Keep the message to two lines:
+
+1. The actual work/MR title, including the ticket identifier. Remove only an
+   automatic Draft: prefix.
+2. The verified LGTM MR review link and a mention of the assigned review owner.
+
+Resolve the review owner's actual Slack ID from the task's assigned owner;
+do not substitute the MR author or invent a reviewer. Keep summaries, test
+counts, SHAs, CI status, blockers, readiness claims, proof/plan links and tooling
+details on the MR and in the task record. Do not include them in the channel
+message. Release-access setup does not delay an otherwise ready code review.
 
 Check the task's receipt and existing MR review thread before posting. Send one
 initial request per MR; put material candidate or readiness updates in that
 thread. Do not repost for status polls. Verify the sent message and record its
-channel, timestamp, permalink and candidate SHA in the task plan. If sending
+channel, timestamp, permalink, reviewer and candidate SHA in the task plan. If sending
 fails, record the error and report the handoff as incomplete. Resume from the
 receipt rather than assuming a message was delivered. Use a different channel
 when the user explicitly selects one.

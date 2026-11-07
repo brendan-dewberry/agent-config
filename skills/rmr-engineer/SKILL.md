@@ -88,7 +88,7 @@ human decision. Distinguish implementation, green CI, merge, deployment, actual
 feature exposure and cleanup. Completion requires the agreed release,
 observation and cleanup requirements to be verified.
 
-When the candidate is ready for review, post its review package to #rmr-eng
-before waiting for approval. Follow the lifecycle's handoff rules and record
-the Slack permalink and candidate SHA. A local/chat update alone does not
-complete this handoff.
+When the candidate is ready for review, post the lifecycle's two-line request
+to #rmr-eng before waiting for approval. Keep proof and status details on the
+MR. Record the Slack permalink and candidate SHA privately. A local/chat update
+alone does not complete this handoff.
