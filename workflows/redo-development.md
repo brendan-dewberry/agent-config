@@ -10,6 +10,18 @@ Resolve repository-relative paths below from the active Redo checkout.
 
 ## Default workflow and precedence
 
+### Opt-in local RMR Engineer
+
+For tasks explicitly assigned to the local RMR Engineer workflow, use
+`$HOME/.agents/skills/rmr-engineer/SKILL.md` and its lifecycle reference.
+That workflow permits automatic architecture review and routine CI preparation,
+then requires one human approval of the proven candidate and its release plan.
+It defines the authorized merge, rollout, monitoring and mechanical cleanup.
+These scoped rules replace the separate routine permission gates below for
+that task. Mandatory provider reviews, explicit restrictions, checkout safety,
+environment choices and code-owner/validation-helper roles still apply.
+Other tasks continue to use the default workflow below.
+
 Use the active task worktree's repository-managed
 `cloud-buddy` skill at `.agents/skills/cloud-buddy/SKILL.md` for local
 implementation paired with persistent Cursor Cloud validation. Read its current

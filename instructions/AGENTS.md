@@ -49,6 +49,12 @@ their glossary and ADR references to this personal documentation root.
 
 ## Redo Development Workflow
 
+When Brendan explicitly selects the local RMR Engineer workflow, load
+[rmr-engineer](/Users/brendan/.agents/skills/rmr-engineer/SKILL.md).
+Its scoped architecture, CI and release approval policy takes precedence over
+the personal workflow's separate routine permission gates for that task.
+Preserve repository requirements, the code owner and the selected environment.
+
 For Redo development tasks in either local checkout, read and follow
 [Brendan's agentic development workflow](/Users/brendan/.agents/workflows/redo-development.md).
 Use the active checkout's `.agents/skills/architecture-review/SKILL.md` for
