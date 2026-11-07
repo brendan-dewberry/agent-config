@@ -25,7 +25,7 @@ files in this repository and use Git to track changes over time.
 | `grilling` | Shared interview procedure | None |
 | `domain-modeling` | Clarify domain terminology and document decisions | Bundled glossary and ADR formats |
 | `redo-agents-api` | Inspect and manage Redo Agents through its authenticated HTTP API | Local Redo Agents API key |
-| `rmr-engineer` | Run selected RMR tickets locally through architecture, build, proof, one human release gate, merge, monitoring and cleanup | Linear/GitLab access and the product checkout's engineering skills |
+| `rmr-engineer` | Run selected RMR tickets locally through architecture, build, proof, Slack review handoff, one human release gate, merge, monitoring and cleanup | Linear/GitLab/Slack access and the product checkout's engineering skills |
 
 Start a task with `Use RMR Engineer to work on RMR-123`, or continue it with
 `Use RMR Engineer to resume RMR-123`. This is an opt-in local Codex workflow.

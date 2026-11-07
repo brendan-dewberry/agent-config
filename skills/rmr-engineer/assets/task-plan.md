@@ -43,6 +43,14 @@ trivial exception when applicable. Separate replay markers and runtime controls.
 Current candidate, pipelines/child jobs, findings, conflicts, provider approvals
 and legitimate checks that depend on human approval.
 
+## Slack review handoff
+
+- Status: not ready / pending send / posted / blocked
+- Channel and existing review thread:
+- Candidate SHA and plan revision:
+- Message timestamp, permalink and verified delivery:
+- Requested review action and remaining release blockers:
+
 ## Release, observation and cleanup plan
 
 Deployment mechanism and inclusion evidence. Initial exposure, expansion

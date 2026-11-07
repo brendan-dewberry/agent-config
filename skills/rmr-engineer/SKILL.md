@@ -40,6 +40,7 @@ instead of inventing tool names or assuming configured access works.
 | Builds/tests/runtime | cloud-buddy skill and selected environment |
 | Draft MR | create-pr skill |
 | CI/reviews | ci-fix and watch-pr skills |
+| Review handoff | Connected Slack tools, #rmr-eng, and the lifecycle's required review post |
 | Production observation | watch-prod skill, deployment evidence and granted Datadog tools |
 | Feature switches | Existing product flag framework and granted provider tools |
 
@@ -61,9 +62,10 @@ access as an implementation shortcut.
 
 The implementation assignment authorizes research, automatic architecture review,
 scoped coding/repairs, validation, commits/pushes, a draft MR, review-thread
-handling, marking ready and required CI preparation. Once checks pass, release
-an existing draft pipeline using the repository's normal label and gate-retry
-procedure. Do not request separate plan or CI permission for routine progress.
+handling, the required Slack review handoff, marking ready and required CI
+preparation. Once checks pass, release an existing draft pipeline using the
+repository's normal label and gate-retry procedure. Do not request separate plan
+or CI permission for routine progress.
 Explicit task restrictions still apply.
 
 There is one planned human decision gate: approve the proven candidate and its
@@ -85,3 +87,8 @@ Report current stage, completed evidence, blocker/next action and any needed
 human decision. Distinguish implementation, green CI, merge, deployment, actual
 feature exposure and cleanup. Completion requires the agreed release,
 observation and cleanup requirements to be verified.
+
+When the candidate is ready for review, post its review package to #rmr-eng
+before waiting for approval. Follow the lifecycle's handoff rules and record
+the Slack permalink and candidate SHA. A local/chat update alone does not
+complete this handoff.

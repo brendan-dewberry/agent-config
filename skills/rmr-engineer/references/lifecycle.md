@@ -75,6 +75,24 @@ Present one review package containing:
 - Cleanup plan: winning behavior, removal condition and exact mechanical
   change categories covered by this approval.
 
+### Required Slack review handoff
+
+After the candidate's approval-independent checks pass and evidence is attached
+to the MR, post a concise review request to #rmr-eng, channel C0938J181B8, using
+the connected Slack tools. Include the Linear ticket, verified LGTM MR link,
+behavior change, candidate SHA, proof/evidence links, CI status, feature-switch
+state and the review action needed. State remaining release or native approval
+blockers. Release-access setup does not delay an otherwise ready code review.
+Keep the human release gate and mandatory provider approvals explicit.
+
+Check the task's receipt and existing MR review thread before posting. Send one
+initial request per MR; put material candidate or readiness updates in that
+thread. Do not repost for status polls. Verify the sent message and record its
+channel, timestamp, permalink and candidate SHA in the task plan. If sending
+fails, record the error and report the handoff as incomplete. Resume from the
+receipt rather than assuming a message was delivered. Use a different channel
+when the user explicitly selects one.
+
 Obtain the assigned human's approval of that package. Prefer actual native MR
 approval; retain actor, source, time, reviewed SHA and plan revision. An explicit
 conversation approval can authorize release of the named package, but does not
