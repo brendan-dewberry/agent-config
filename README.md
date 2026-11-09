@@ -97,6 +97,18 @@ repository-relative paths refer to the active Redo checkout, so it continues
 using that checkout's managed skills. Include the applicable workflow in cloud
 handoff briefs because Redo's Git history does not carry it.
 
+The workflow selects a task type before applying development stages.
+Investigations stay read-only. Data cleanup, backfills and manage scripts use
+local development, a short plan, a dry run and focused validation. They do not
+require architecture approval, cloud setup or heavy testing. Product changes
+retain the architecture and Cloud Buddy workflow; explicitly selected RMR
+Engineer tickets retain their own release policy. Production data writes still
+require authorization for the specific repair.
+
+For example, "Use data maintenance to backfill this existing field" selects
+local script development and focused checks. An investigation selects the
+read-only path automatically; it does not need a separate workflow invocation.
+
 ## Make changes
 
 Edit the original files in this repository. Existing links expose the edits

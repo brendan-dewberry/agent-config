@@ -55,13 +55,20 @@ Its scoped architecture, CI and release approval policy takes precedence over
 the personal workflow's separate routine permission gates for that task.
 Preserve repository requirements, the code owner and the selected environment.
 
-For Redo development tasks in either local checkout, read and follow
+For Redo tasks in either local checkout, read and follow
 [Brendan's agentic development workflow](/Users/brendan/.agents/workflows/redo-development.md).
-Use the active checkout's `.agents/skills/architecture-review/SKILL.md` for
-planning and implementation walkthroughs. Honor approvals and environment
-choices already given in the conversation. Include the applicable workflow in
-cloud handoff briefs because the Redo repository does not contain this personal
-workflow.
+Select its task type before applying environment or review requirements.
+Investigations are read-only. Data cleanup, backfills and manage scripts use
+the local data-maintenance path with a short plan, dry run and focused checks;
+they require no architecture approval, cloud development, cloud validation or
+heavy testing by default. Settings changes and production writes still need
+authorization for their actual effects.
+
+For product-development planning and implementation walkthroughs, use the active
+checkout's `.agents/skills/architecture-review/SKILL.md`. Honor approvals and
+environment choices already given in the conversation. Include the applicable
+workflow in cloud handoff briefs because the Redo repository does not contain
+this personal workflow.
 
 ## Merge Request Links
 

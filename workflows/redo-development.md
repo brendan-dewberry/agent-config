@@ -1,6 +1,6 @@
 # Brendan's agentic development workflow
 
-Personal workflow, agreed October 3 and updated November 2, 2026.
+Personal workflow, agreed October 3 and updated November 9, 2026.
 This canonical document is versioned in Brendan's private `agent-config`
 repository and applies to both Redo checkouts. It is installed at
 `$HOME/.agents/workflows/redo-development.md`. The previous Redo-local path is
@@ -8,7 +8,108 @@ an ignored symlink to this file.
 
 Resolve repository-relative paths below from the active Redo checkout.
 
-## Default workflow and precedence
+## Choose the task type first
+
+Select the path from the requested outcome before applying architecture,
+environment, validation or release requirements. State the choice briefly and
+proceed. Ask only when the distinction would change the scope or authorized
+effects. Brendan's explicit environment choice and existing approvals apply.
+This routing supersedes older personal local guidance that applies cloud-only
+validation or architecture walkthroughs to every task. Repository correctness
+requirements still apply.
+
+| Task type | Use for | Default path |
+| --- | --- | --- |
+| Investigation | Diagnose behavior, query data, explain a failure or produce a candidate report | Read-only investigation below |
+| Data maintenance | Data cleanup, backfills, repairs and manage scripts using existing schemas and domain operations | Local data maintenance below |
+| Product development | Change ongoing application behavior, APIs, UI, schemas or infrastructure | Product development workflow below |
+| Instructions and configuration | Personal workflows, skills, docs and agent configuration | Edit locally and check the changed instructions or configuration |
+| Local RMR Engineer | A ticket explicitly assigned to that workflow | The opt-in RMR Engineer policy below |
+
+Classify by the effect, not the file extension or the ticket label. A manage
+script does not require the product-development path merely because it is
+TypeScript in the product repository. A new recurring scheduler, production
+endpoint, schema migration or change to shared application behavior does.
+Separate a mixed task into scoped parts and apply the appropriate path to each.
+An investigation that finds a product bug can finish its diagnosis before
+starting the product change.
+
+### Investigation
+
+- Use current source, existing read-only tools and bounded queries. Gather
+  concrete identifiers and compare expected behavior with observed records.
+- No architecture approval, HTML walkthrough, Cloud Buddy, cloud environment
+  or test suite is required. Use an artifact only when it helps explain or
+  preserve the evidence. Do not create application code to conduct a query
+  that existing tools can answer.
+- Keep facts, inferences and missing evidence distinct. Report the source,
+  affected records, likely cause and next action.
+- Investigation is read-only. A stated expectation or corrected fact is not an
+  instruction to change settings or repair production data. If repair is also
+  requested, route that part to data maintenance or product development.
+
+### Local data maintenance
+
+Use this path for a bounded operational outcome such as cancelling obsolete
+empty consolidations, repairing inconsistent rows or backfilling an existing
+field. It includes the manage script and necessary script-specific helpers.
+Keep reusable application behavior changes separate.
+
+1. **Establish the repair scope.** Trace the current behavior and reuse the
+   existing manage tools, domain services and repositories. Load the checkout's
+   `manage-script-write` skill when writing a mutation script, plus applicable
+   query or domain guidance. Give a short plan in chat or a local task record
+   with the target environment, selection rule, exclusions, intended effects
+   and verification. No separate architecture approval or HTML walkthrough is
+   required before coding.
+2. **Build locally.** Codex writes and validates the script in the selected local
+   checkout or task worktree. Local Bazel builds, type checks, lint, required
+   generation and focused tests are allowed for this path. Follow repository
+   commands and checkout safety. Cloud development, Cloud Buddy and cloud
+   validation are optional only when Brendan requests them. Do not provision
+   a cloud environment or require a Dev Store to satisfy this path by default.
+3. **Validate the actual risk.** Run the touched script or package's relevant
+   build/type and lint checks, then exercise selection and exclusions in
+   read-only mode against the intended data. Prefer existing checks and small
+   scratch probes. Add focused tests only when they catch a plausible failure
+   in the repair logic that types, existing tests and the dry run do not catch.
+   No broad integration/e2e suite, full application build or test quota is
+   required by this personal workflow. A dry run proves selection, not that
+   writes work; use a small disposable fixture or focused regression check
+   when needed to prove the mutation. Preserve mandatory repository checks.
+4. **Prepare a reviewable execution.** Default to report-only and provide
+   `--readonly` for mutation scripts. Produce counts and record IDs, explain
+   ambiguous exclusions, and keep apply mode limited to the reviewed scope.
+   Recheck eligibility before each write, using the same transaction/locks as
+   the existing domain operation where concurrent work matters. Include an
+   actor/reason, progress and a result report. Make retries and partial runs
+   safe, with a clear recovery or rollback procedure where available.
+5. **Apply the authorized repair and verify it.** Production writes require
+   authorization for their specific target and effects. Approval to investigate
+   or build a script alone does not authorize applying it. Carry forward an
+   existing cleanup authorization when the dry run matches its scope; do not
+   ask again for routine batches. Ask only if effects are ambiguous or the
+   proposed repair expands that scope. After applying, read back the affected
+   records and check both the intended result and protected exclusions. Report
+   changed, skipped and failed counts, with any remaining work.
+
+Do not infer permission to change merchant settings, contracts, schedules,
+inventory or billing policy from a cleanup request for different records.
+Keep the selected environment. Do not start, seed, restore or replace a service
+stack without the repository's required authorization.
+
+This path overrides the personal product-development requirements below for
+architecture approval, cloud-only checks, cloud push helpers, hands-on app
+demonstrations and final cloud validation. A script does not automatically need
+a draft MR, deployment or release pipeline to execute an authorized repair.
+When it is committed or shared, follow the repository's normal version-control
+and review rules. Config-only work stays local as well.
+
+## Product development workflow and precedence
+
+The rest of this document applies to product development and its cloud
+validation. It does not impose those stages on investigation, local data
+maintenance, or instructions/configuration tasks selected above.
 
 ### Opt-in local RMR Engineer
 
@@ -20,7 +121,7 @@ It defines the authorized merge, rollout, monitoring and mechanical cleanup.
 These scoped rules replace the separate routine permission gates below for
 that task. Mandatory provider reviews, explicit restrictions, checkout safety,
 environment choices and code-owner/validation-helper roles still apply.
-Other tasks continue to use the default workflow below.
+Other product-development tasks continue to use the default workflow below.
 
 Use the active task worktree's repository-managed
 `cloud-buddy` skill at `.agents/skills/cloud-buddy/SKILL.md` for local
