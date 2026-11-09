@@ -57,11 +57,9 @@ def review_message(args):
         or any(char in args.mr_url for char in "\r\n<>|")
     ):
         raise SlackError("Use the verified LGTM review URL")
-    if not re.fullmatch(r"U[A-Z0-9]+", args.reviewer):
-        raise SlackError("Use the assigned review owner's verified Slack user ID")
     return (
         f"*{html.escape(title, quote=False)}*\n"
-        f"<{args.mr_url}|Review MR !{args.mr_iid}> · <@{args.reviewer}>"
+        f"<{args.mr_url}|Review MR !{args.mr_iid}>"
     )
 
 
@@ -74,14 +72,13 @@ def main():
     parser.add_argument("--title")
     parser.add_argument("--mr-url")
     parser.add_argument("--mr-iid", type=int)
-    parser.add_argument("--reviewer")
     parser.add_argument("--thread-ts", help="Existing review thread for an update")
     args = parser.parse_args()
     if args.post and (
-        not all([args.title, args.mr_url, args.mr_iid, args.reviewer])
+        not all([args.title, args.mr_url, args.mr_iid])
         or args.mr_iid < 1
     ):
-        parser.error("--post requires --title, --mr-url, --mr-iid and --reviewer")
+        parser.error("--post requires --title, --mr-url and --mr-iid")
     message = review_message(args) if args.post else None
     try:
         token = args.token_file.expanduser().read_text().strip()

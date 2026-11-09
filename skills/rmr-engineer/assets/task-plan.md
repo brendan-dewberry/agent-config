@@ -47,7 +47,7 @@ and legitimate checks that depend on human approval.
 
 - Status: not ready / pending send / posted / blocked
 - Channel and existing review thread:
-- Assigned review owner and verified Slack ID:
+- Assigned review owner and native approval eligibility:
 - Verified bot sender or explicit fallback authorization:
 - Candidate SHA and plan revision:
 - Message timestamp, permalink and verified delivery:

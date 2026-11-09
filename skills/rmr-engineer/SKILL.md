@@ -102,7 +102,7 @@ alone does not complete this handoff.
 For a local Patch token file, use [the Slack sender](scripts/slack-review.py).
 Run `--token-file <path> --check` first. After checking the task receipt and
 channel for duplicates, use `--post --title <actual-title> --mr-url <verified-lgtm-url>
---mr-iid <iid> --reviewer <verified-slack-id>` with that token file. Use
+--mr-iid <iid>` with that token file. Do not add engineer tags. Use
 `--thread-ts <ts>` for an update in the existing thread. Keep the token outside
 Git; never pass its value in arguments or chat. Save the returned receipt and
 read the message back through Slack. The sender verifies Patch's user/workspace

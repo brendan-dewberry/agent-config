@@ -89,10 +89,11 @@ account unless he explicitly chooses that fallback. Keep the message to two line
 
 1. The actual work/MR title, including the ticket identifier. Remove only an
    automatic Draft: prefix.
-2. The verified LGTM MR review link and a mention of the assigned review owner.
+2. The verified LGTM MR review link.
 
-Resolve the review owner's actual Slack ID from the task's assigned owner;
-do not substitute the MR author or invent a reviewer. Keep summaries, test
+For now, do not tag engineers in the initial post or thread updates. MRs can be
+authored as the same user the workflow would tag. Keep reviewer assignments and
+native approval eligibility on the MR and in the task record. Keep summaries, test
 counts, SHAs, CI status, blockers, readiness claims, proof/plan links and tooling
 details on the MR and in the task record. Do not include them in the channel
 message. Release-access setup does not delay an otherwise ready code review.
@@ -100,7 +101,7 @@ message. Release-access setup does not delay an otherwise ready code review.
 Check the task's receipt and existing MR review thread before posting. Send one
 initial request per MR; put material candidate or readiness updates in that
 thread. Do not repost for status polls. Verify the sent message and record its
-channel, timestamp, permalink, reviewer and candidate SHA in the task plan. If sending
+channel, timestamp, permalink, sender and candidate SHA in the task plan. If sending
 fails, record the error and report the handoff as incomplete. Resume from the
 receipt rather than assuming a message was delivered. Use a different channel
 when the user explicitly selects one.
