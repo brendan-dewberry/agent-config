@@ -37,10 +37,15 @@ authorized work. Resolve release-critical access before requesting the human gat
 
 ## 2. Build & validate
 
-Implement the recorded outcome and necessary prerequisites. Start or reuse the
-validation helper when product-code scope is known. Use the selected runtime
-and Dev Store. Codex reviews and commits code and generated patches; validation
-helpers do not take over implementation.
+Implement the recorded outcome and necessary prerequisites. Apply the shared
+[validation and database-access policy](../../../workflows/redo-development.md#choose-validation-depth-and-data-access).
+Record Cloud checks or Cloud runtime proof and why it covers the acceptance
+requirements. Start or reuse the helper when code needs checks or execution;
+all Bazel, types, lint, generation and tests stay in Cloud. A manage script and
+database readback can be sufficient without a full app or UI. Use a browser
+when the changed behavior needs it. Preserve any selected runtime/Dev Store.
+Codex reviews and commits code and generated patches; validation helpers do
+not take over implementation.
 
 Use an existing product feature switch by default, initially off. Record its
 key, owner, defaults, targeting, removal condition and guarded paths. Prove that
@@ -54,8 +59,10 @@ size alone does not establish triviality. If a meaningful change cannot be
 switched safely, settle its concrete release constraint rather than silently
 skipping the requirement.
 
-Run scoped checks and realistic proof using existing skills. Tie each result
-to the tested SHA, environment, fixture, actual test count and evidence. Label
+Run scoped checks and the selected proof using existing skills. Obtain required
+Waypoint plans/measurements separately when Cloud/PGMask cannot supply them;
+record the gap until that evidence returns. Tie each result to the tested SHA,
+environment, fixture, actual test count and evidence. Label
 mocked-provider and real integration results accurately. Create/adopt a draft
 MR, inspect the complete diff and callers, fix findings and revalidate affected
 paths. Keep adjacent work outside scope.

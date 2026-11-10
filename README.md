@@ -99,14 +99,17 @@ handoff briefs because Redo's Git history does not carry it.
 
 The workflow selects a task type before applying development stages.
 Investigations stay read-only. Data cleanup, backfills and manage scripts use
-local development, a short plan, a dry run and focused validation. They do not
-require architecture approval, cloud setup or heavy testing. Product changes
-retain the architecture and Cloud Buddy workflow; explicitly selected RMR
-Engineer tickets retain their own release policy. Production data writes still
-require authorization for the specific repair.
+a short plan, local editing, a dry run and focused validation. All Bazel,
+builds, types, lint, generation and application tests run in Cloud. Choose
+Cloud checks without a full app stack or Cloud runtime proof using the script,
+services or UI required by the change. Local read-only Waypoint queries can
+provide required database evidence through an existing approved client.
+Product changes retain architecture review; explicitly selected RMR Engineer
+tickets retain their own release policy. Production data writes still require
+authorization for the specific repair.
 
 For example, "Use data maintenance to backfill this existing field" selects
-local script development and focused checks. An investigation selects the
+local script editing and focused Cloud checks. An investigation selects the
 read-only path automatically; it does not need a separate workflow invocation.
 
 ## Make changes

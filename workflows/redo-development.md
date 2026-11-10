@@ -1,6 +1,6 @@
 # Brendan's agentic development workflow
 
-Personal workflow, agreed October 3 and updated November 9, 2026.
+Personal workflow, agreed October 3 and updated November 10, 2026.
 This canonical document is versioned in Brendan's private `agent-config`
 repository and applies to both Redo checkouts. It is installed at
 `$HOME/.agents/workflows/redo-development.md`. The previous Redo-local path is
@@ -14,14 +14,15 @@ Select the path from the requested outcome before applying architecture,
 environment, validation or release requirements. State the choice briefly and
 proceed. Ask only when the distinction would change the scope or authorized
 effects. Brendan's explicit environment choice and existing approvals apply.
-This routing supersedes older personal local guidance that applies cloud-only
-validation or architecture walkthroughs to every task. Repository correctness
-requirements still apply.
+This routing supersedes older personal guidance that requires architecture
+walkthroughs or a running app for every task. All application builds and checks
+still run in Cloud, as specified below. Repository correctness requirements
+still apply.
 
 | Task type | Use for | Default path |
 | --- | --- | --- |
 | Investigation | Diagnose behavior, query data, explain a failure or produce a candidate report | Read-only investigation below |
-| Data maintenance | Data cleanup, backfills, repairs and manage scripts using existing schemas and domain operations | Local data maintenance below |
+| Data maintenance | Data cleanup, backfills, repairs and manage scripts using existing schemas and domain operations | Data maintenance below |
 | Product development | Change ongoing application behavior, APIs, UI, schemas or infrastructure | Product development workflow below |
 | Instructions and configuration | Personal workflows, skills, docs and agent configuration | Edit locally and check the changed instructions or configuration |
 | Local RMR Engineer | A ticket explicitly assigned to that workflow | The opt-in RMR Engineer policy below |
@@ -38,17 +39,17 @@ starting the product change.
 
 - Use current source, existing read-only tools and bounded queries. Gather
   concrete identifiers and compare expected behavior with observed records.
-- No architecture approval, HTML walkthrough, Cloud Buddy, cloud environment
-  or test suite is required. Use an artifact only when it helps explain or
-  preserve the evidence. Do not create application code to conduct a query
-  that existing tools can answer.
+- No architecture approval, HTML walkthrough, coding VM or test suite is
+  required when existing read-only tools can answer the question. Use an
+  artifact only when it helps explain or preserve evidence. If a diagnostic
+  requires application code or tests, run those in Cloud at the depth below.
 - Keep facts, inferences and missing evidence distinct. Report the source,
   affected records, likely cause and next action.
 - Investigation is read-only. A stated expectation or corrected fact is not an
   instruction to change settings or repair production data. If repair is also
   requested, route that part to data maintenance or product development.
 
-### Local data maintenance
+### Data maintenance
 
 Use this path for a bounded operational outcome such as cancelling obsolete
 empty consolidations, repairing inconsistent rows or backfilling an existing
@@ -62,12 +63,11 @@ Keep reusable application behavior changes separate.
    with the target environment, selection rule, exclusions, intended effects
    and verification. No separate architecture approval or HTML walkthrough is
    required before coding.
-2. **Build locally.** Codex writes and validates the script in the selected local
-   checkout or task worktree. Local Bazel builds, type checks, lint, required
-   generation and focused tests are allowed for this path. Follow repository
-   commands and checkout safety. Cloud development, Cloud Buddy and cloud
-   validation are optional only when Brendan requests them. Do not provision
-   a cloud environment or require a Dev Store to satisfy this path by default.
+2. **Edit locally; check in Cloud.** Codex writes the script in the selected
+   local checkout or task worktree. Run Bazel, types, lint, generation and tests
+   in Cloud. Choose validation depth and data access below. A script does not
+   automatically require a full app stack or Dev Store; existing read-only
+   tools may suffice for data inspection without a coding VM.
 3. **Validate the actual risk.** Run the touched script or package's relevant
    build/type and lint checks, then exercise selection and exclusions in
    read-only mode against the intended data. Prefer existing checks and small
@@ -98,17 +98,113 @@ inventory or billing policy from a cleanup request for different records.
 Keep the selected environment. Do not start, seed, restore or replace a service
 stack without the repository's required authorization.
 
-This path overrides the personal product-development requirements below for
-architecture approval, cloud-only checks, cloud push helpers, hands-on app
-demonstrations and final cloud validation. A script does not automatically need
+This path does not require the product-development architecture approval,
+hands-on app demonstration or full application validation. The Cloud execution
+rule still applies to builds and checks. A script does not automatically need
 a draft MR, deployment or release pipeline to execute an authorized repair.
 When it is committed or shared, follow the repository's normal version-control
-and review rules. Config-only work stays local as well.
+and review rules. Instruction and config-only checks can stay local when they
+do not invoke application tooling.
+
+## Choose validation depth and data access
+
+Choose the smallest proof that covers the acceptance requirements and plausible
+failures. Record the choice, reason, required checks, data source and expected
+result in the task plan or brief. This choice does not add an approval gate or
+waive a repository requirement. Add deeper proof when the change or a failed
+check reveals a risk the selected checks cannot cover.
+
+### Cloud checks or Cloud runtime proof
+
+| Choice | Use when | Execution |
+| --- | --- | --- |
+| Cloud checks | Types, lint, generation and focused tests can prove the change | Use a regular environment and `Runtime: none` in the Buddy brief. Run the relevant Bazel targets without starting the whole app. Tests may start their required databases or test services. |
+| Cloud runtime proof | Correctness depends on executing a script, a service/API flow, a real browser interaction or an integration | Start only the required runtime. A manage-script dry run and database readback can be sufficient; start the UI only when the acceptance requirements need it. Use a selected Dev Store when its data or integrations are necessary. |
+
+These are proof depths, not separate agent types. Reuse the same VM when it
+supports the required runtime and selected environment.
+
+All Bazel commands, application builds, type checks, lint, generation,
+dependency installation and application tests run in Cloud, including quick
+checks and data-maintenance scripts. Do not use the repository skill's
+one-minute allowance to run these on the laptop. Local work is source editing,
+Git, static document/config checks, existing API tools and the bounded database
+queries described below. Do not create local build caches or install a runtime
+to avoid Cloud startup.
+
+Use existing Cloud Buddy capabilities rather than creating another validator:
+
+- For local implementation, start or reuse Buddy when code needs Cloud checks
+  or execution. Buddy does not imply a Dev Store or browser session. Docs and
+  skills that need only static checks do not need Buddy.
+- For an agent already implementing in Cloud, use its existing VM for routine
+  checks when its workflow permits. A second helper is needed only for a
+  required independent review, missing capability/runtime or useful parallel
+  proof. Do not bypass a host's explicit helper requirement; update its own
+  instructions before changing that behavior.
+- Choose the environment after choosing proof depth. The current regular
+  environment `Gitlab Redo Repo Local Dev` does not start the app stack on boot.
+  Verify current availability before dispatch. A Dev Store environment may
+  start services during boot even when a later brief says `Runtime: none`.
+- Preserve an explicitly selected environment and existing stacks. Do not
+  switch stores, restore data or stop another stack to reduce cost. When a
+  store is required and none was selected, follow the task's existing default.
+- Reuse a warm VM and valid current-candidate evidence. New application code
+  still needs a Cloud executor; this policy avoids unnecessary app startup,
+  not all VM provisioning. Existing CI evidence may satisfy a check when the
+  workflow allows it. Do not start heavy CI to evade its approval rules.
+
+For a backend/query change, scoped regression tests plus script output and
+database readback may be the complete proof. For a UI interaction, exercise
+the real affected component or app and inspect screenshots. Use real
+service/database paths to prove authentication, persistence or integrations;
+start the full app when the claim depends on those paths working through the
+UI. A backend script can exercise real behavior without a browser. A mock UI
+cannot establish backend correctness. Follow any stricter repository or
+feature-specific proof requirements.
+
+### Choose database access separately
+
+Check the actual environment's connection before planning around it. Cloud
+does not universally have or lack Waypoint access. A configured grant alone
+does not establish that a particular Work's relay is healthy.
+
+- **Cloud test database or Dev Store:** execute unmerged code and prove writes,
+  transactions, selection and readback against appropriate fixtures. A small
+  fixture proves correctness, not production performance.
+- **PGMask:** use the granted native tool or the documented Cloud relay for
+  permitted masked, read-only production queries and schema inspection.
+  PGMask is a restricted route to masked Waypoint data. Read the current
+  `tools/pgmask/README.md` for that route's limits and supported query forms.
+  Native and shell routes can differ. Respect privacy holds and refusals.
+- **Waypoint performance proof:** use an approved connection that supports
+  the required query plans and measurements. Follow the SQL skill, including
+  production `EXPLAIN ANALYZE` and comparative measurements when required.
+  A permitted PGMask plan can provide evidence, but a PGMask grant, proxy
+  elapsed time or Dev Store timing alone does not satisfy that requirement.
+- **Local Waypoint query:** when Cloud lacks the necessary supported path and
+  this Mac has one, use an existing approved SQL client/tool for bounded,
+  read-only queries. Keep builds and application execution in Cloud. If a
+  manage script requires Bazel, execute it in Cloud; export the exact SQL and
+  parameters for a local database check instead of building it locally.
+
+Missing network access or an unsupported plan command is different from a
+privacy/authorization refusal. Do not use broader local credentials or rewrite
+queries to bypass a data-access restriction. Production writes still need
+authorization for their specific effects.
+
+A hosted agent that cannot obtain required Waypoint evidence prepares a query
+packet: candidate SHA, exact SQL and parameters, permitted cohort, expected
+result and required plan/measurements. A person or an authorized local agent
+runs it and returns evidence to the same task/MR. Do not assume a cloud agent
+can execute on a laptop without an existing authorized connection. Continue
+independent checks; keep a required performance gate open until evidence is
+available. This workflow does not introduce a Helm or local-worker bridge.
 
 ## Product development workflow and precedence
 
 The rest of this document applies to product development and its cloud
-validation. It does not impose those stages on investigation, local data
+validation. It does not impose those stages on investigation, data
 maintenance, or instructions/configuration tasks selected above.
 
 ### Opt-in local RMR Engineer
@@ -126,10 +222,10 @@ Other product-development tasks continue to use the default workflow below.
 Use the active task worktree's repository-managed
 `cloud-buddy` skill at `.agents/skills/cloud-buddy/SKILL.md` for local
 implementation paired with persistent Cursor Cloud validation. Read its current
-skill, templates, push helper, and shared Cursor-agent runbook as needed. Start
-the buddy when product code needs to be built, tested, or run; skip cloud setup
-for docs, skills, and config-only changes. This replaces the earlier
-`cloud-delegate` default and its orchestration, overlay, and Land-stage
+skill, templates, push helper, and shared Cursor-agent runbook as needed. Choose
+validation depth above before starting the buddy; skip cloud setup for docs,
+skills and config-only changes that need only static checks. This replaces the
+earlier `cloud-delegate` default and its orchestration, overlay, and Land-stage
 mechanics. Keep the repository-managed skills intact; personal preferences
 belong here and in local agent instructions.
 
@@ -165,15 +261,20 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
 - Temporary seeding, instrumentation, or generated changes must be disclosed.
   Evidence from a modified cloud tree is provisional until Codex commits the
   needed changes and Cursor validates the resulting clean candidate SHA.
+- Include the validation choice and reason, required checks, data source and
+  expected proof. Use `Runtime: none` for checks without an app stack. For
+  runtime proof, name only the services, script or browser flow needed.
 - Honor the runtime and Dev Store already selected. If the selected store
   cannot be restored or accessed, mark dependent checks blocked; do not quietly
   substitute seeded data and call the original acceptance criterion passed.
-- Provide a working demonstration for hands-on approval and review the final
-  diff and affected callers. Plan approval, behavior approval, and "done" do
-  not authorize heavy CI gates, merge, deployment, or production writes.
-- Return screenshots or a short demo recording for user-visible changes, with
-  the tested SHA, runtime, fixtures, and steps. Codex inspects the evidence and
-  attaches it to the MR as described below.
+- Provide the selected proof for behavior review and inspect the final diff
+  and affected callers. Use a hands-on demo when the change needs one.
+  Plan approval, behavior approval, and "done" do not authorize heavy CI gates,
+  merge, deployment, or production writes.
+- Return screenshots or a short demo recording for visible UI changes. For
+  script/backend proof, return commands, output and relevant database readback.
+  Include the tested SHA, runtime, fixtures and steps. Codex inspects the
+  evidence and attaches it to the MR as described below.
 - Keep MR descriptions concise and preserve unrelated checkout work. Do not
   spawn helper agents unless the user or an applicable instruction requests it.
 
@@ -181,24 +282,26 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
 
 1. **Investigate and plan.** Read current source, relevant docs, existing reuse,
    and selected validation playbooks. Establish intended behavior, scope,
-   meaningful failure cases, and exact live proof. Produce the HTML plan and
-   obtain approval before implementation.
+   meaningful failure cases, validation depth and exact required proof.
+   Produce the HTML plan and obtain approval before implementation.
 2. **Implement locally.** Use one task branch/worktree and one code owner.
    Record the path, base SHA, branch, and owner. Write code and regression
    coverage, review the complete diff, and commit only intended changes.
 3. **Start the buddy, push, and open a draft MR.** Start the buddy as soon as
    the product-code scope is known, while local work continues. Use the
    cloud-buddy brief template and shared Cursor-agent launch/watch helpers.
-   Name the runtime, affected packages, expected behavior, and standing checks.
-   Use `cloud-buddy/scripts/push.sh` subject to the shared-branch rules below,
-   then create the draft immediately. Do not enable heavy CI.
+   Name the validation depth, runtime, affected packages, expected behavior and
+   standing checks. Use the skill's `scripts/buddy.sh push` command subject to
+   the shared-branch rules below, then create the draft immediately. Do not
+   enable heavy CI.
 4. **Iterate with Cursor.** Reuse the same buddy and runtime. After every push,
    have it fetch the exact candidate SHA and run the standing checks. Send
    additional questions through the shared followup helper and re-arm the
-   watcher. Prove changed paths live and independently inspect the returned
+   watcher. Complete the selected proof and independently inspect the returned
    evidence. Apply suggested patches locally and push completed batches.
-5. **Approve behavior and review implementation.** Provide verified links and
-   test steps for Brendan. Attach validation evidence directly to the MR.
+5. **Approve behavior and review implementation.** Provide proof and reproduction
+   steps for Brendan, with verified access links when a live demo is needed.
+   Attach validation evidence directly to the MR.
    Update the same HTML walkthrough with actual code, deviations, evidence,
    and gaps. Fix findings and revalidate affected paths.
 6. **Complete final cloud checks when Brendan says done.** Use the same buddy
@@ -212,10 +315,10 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
    need their own authorized MR; memory-folder updates need an explicit request.
 
 Run the buddy's standing checks on each pushed candidate, including relevant
-builds, lint, types, regression coverage, and live proof. Keep checks scoped to
-what changed and verify that filtered test runs actually ran the intended
-tests. No local checks are implied by the skill's allowance for quick checks;
-the personal cloud-only preference above still applies.
+builds, lint, types, regression coverage and the selected runtime proof. Keep
+checks scoped to what changed and verify that filtered test runs actually ran
+the intended tests. No local checks are implied by the skill's allowance for
+quick checks; the personal cloud-only preference above still applies.
 
 ## Worktrees, pushes, and setup
 
@@ -260,11 +363,16 @@ file/line evidence so Codex can correct the code locally.
 ## MR validation evidence
 
 Before handing off an MR for review, put the validation results and evidence
-on the MR itself. For user-visible changes, upload inspected screenshots or a
+on the MR itself. For visible UI changes, upload inspected screenshots or a
 short demo recording and embed them in the description or a clearly linked MR
 comment. Use before/after captures with the same input when they help explain
 the change. Label mock screenshots as mocks. Evidence kept only in chat, local
 files, or cloud-agent artifacts is not a completed review handoff.
+
+For backend, query or script changes, attach the relevant regression results,
+script output, database readback and required plans/measurements. Do not start
+the UI or invent screenshot requirements for behavior those captures cannot
+prove.
 
 Keep the description concise. Include the tested SHA, runtime, relevant
 fixtures, commands and results, expected versus observed behavior, and remaining

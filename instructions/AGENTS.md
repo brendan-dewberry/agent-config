@@ -59,10 +59,15 @@ For Redo tasks in either local checkout, read and follow
 [Brendan's agentic development workflow](/Users/brendan/.agents/workflows/redo-development.md).
 Select its task type before applying environment or review requirements.
 Investigations are read-only. Data cleanup, backfills and manage scripts use
-the local data-maintenance path with a short plan, dry run and focused checks;
-they require no architecture approval, cloud development, cloud validation or
-heavy testing by default. Settings changes and production writes still need
-authorization for their actual effects.
+the data-maintenance path with a short plan, dry run and focused checks; they
+require no architecture approval or full app stack by default. Choose Cloud
+checks or Cloud runtime proof based on the acceptance requirements. All Bazel,
+builds, types, lint, generation, dependency installation and application tests
+run in Cloud, including quick checks and manage scripts. Local bounded,
+read-only Waypoint queries may supply database evidence through an existing
+approved client. Settings changes and production writes still need
+authorization for their actual effects. Follow the workflow's database-access
+rules; PGMask access alone does not establish production performance proof.
 
 For product-development planning and implementation walkthroughs, use the active
 checkout's `.agents/skills/architecture-review/SKILL.md`. Honor approvals and

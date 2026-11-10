@@ -35,6 +35,11 @@ trivial exception when applicable. Separate replay markers and runtime controls.
 
 ## Validation and proof
 
+- Depth: Cloud checks / Cloud runtime proof, and why it covers acceptance:
+- Required checks and expected proof; selected runtime/store when needed:
+- Database access: test DB / PGMask / Waypoint; verified access and evidence gaps:
+- Cloud Work and any local read-only query handoff:
+
 | Acceptance/check | SHA | Environment/data | Actual result | Evidence/limits |
 | --- | --- | --- | --- | --- |
 

@@ -37,7 +37,7 @@ instead of inventing tool names or assuming configured access works.
 | --- | --- |
 | Ticket/context | Connected Linear tools and current ticket/comments |
 | Plan/proof view | engineering-plan guidance and the checkout's architecture-review skill |
-| Builds/tests/runtime | cloud-buddy skill and selected environment |
+| Builds/tests/runtime | cloud-buddy skill at the chosen validation depth; selected environment |
 | Draft MR | create-pr skill |
 | CI/reviews | ci-fix and watch-pr skills |
 | Review handoff | Patch's authenticated Slack connection or local sender, #rmr-eng, and the lifecycle's two-line post |
@@ -48,6 +48,13 @@ Read each needed skill before use. Include personal code-owner and environment
 rules in validation briefs. No new implementation agent, SDK, controller,
 database, ticket poller or service is required. Helm, hosted Work startup,
 ledger tools, lessons and publication are not dependencies of this local flow.
+
+Choose checks and proof using the shared workflow's
+[validation and database-access policy](../../workflows/redo-development.md#choose-validation-depth-and-data-access).
+All application builds and checks stay in Cloud. A script or database readback
+can prove a backend change without starting the UI. Use browser proof when the
+acceptance requirements need it, and obtain separate Waypoint evidence when
+required performance measurements are unavailable through the Cloud connection.
 
 Use an authenticated automation identity for MR authorship when available and
 verify the actual provider identity. Check the intended human's eligibility to
