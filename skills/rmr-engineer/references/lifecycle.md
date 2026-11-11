@@ -26,7 +26,8 @@ Record an automated architecture verdict and rationale for these criteria:
   blocks the approach.
 
 Proceed automatically when all applicable checks pass. Research factual unknowns
-before asking the user. Ask for unresolved outcomes or consequential choices;
+before asking the user. Ask for unresolved product choices, consequential
+technical uncertainty, unresolved release constraints or requested manual review;
 record the answer and update affected scope. Difficult tickets use this same
 lifecycle with more research and decisions. Honor requested manual plan review.
 Generated recommendations and silence are not human decisions.
