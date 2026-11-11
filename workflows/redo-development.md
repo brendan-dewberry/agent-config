@@ -213,6 +213,10 @@ For tasks explicitly assigned to the local RMR Engineer workflow, use
 `$HOME/.agents/skills/rmr-engineer/SKILL.md` and its lifecycle reference.
 That workflow permits automatic architecture review and routine CI preparation,
 then requires one human approval of the proven candidate and its release plan.
+The automatic architecture path includes features with sourced requirements,
+a supported approach and no unresolved product choice or consequential technical
+uncertainty. Record the evidence and verdict. Honor explicit manual-review and
+planning-only requests; this does not change the default workflow for other tasks.
 It defines the authorized merge, rollout, monitoring and mechanical cleanup.
 These scoped rules replace the separate routine permission gates below for
 that task. Mandatory provider reviews, explicit restrictions, checkout safety,

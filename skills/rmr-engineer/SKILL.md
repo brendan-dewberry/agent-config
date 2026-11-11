@@ -75,6 +75,11 @@ repository's normal label and gate-retry procedure. Do not request separate plan
 or CI permission for routine progress.
 Explicit task restrictions still apply.
 
+Features can use automatic architecture review when the lifecycle's evidence
+criteria pass, requirements are sourced and the implementation assignment is
+authorized. Record the verdict and rationale; honor unresolved human choices
+and an explicit request for manual plan review.
+
 There is one planned human decision gate: approve the proven candidate and its
 release plan. It authorizes merge, specified rollout/rollback, monitoring and
 the narrowly defined mechanical cleanup in that plan. Starting work is not

@@ -23,6 +23,10 @@ Explain current/proposed execution with source-grounded pseudocode and one
 example. Record each applicable lifecycle review criterion and rationale,
 including consequential compatibility and failure behavior.
 
+- Requirement sources and inspected code revision:
+- Architecture review: automated / manual requested; verdict and rationale:
+- Remaining product choices or consequential technical uncertainties:
+
 ## Decisions
 
 | Decision | Answer / unresolved question | Human or automated source | Time |

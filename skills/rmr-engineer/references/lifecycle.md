@@ -31,6 +31,19 @@ record the answer and update affected scope. Difficult tickets use this same
 lifecycle with more research and decisions. Honor requested manual plan review.
 Generated recommendations and silence are not human decisions.
 
+This automatic path includes features with sourced requirements and a clear
+implementation approach. Under an authorized implementation assignment, passing
+the criteria above permits Build and CI without a separate human plan signoff.
+Record requirement sources, inspected code, the automated verdict and rationale.
+Confidence comes from that evidence, not a percentage or the feature label.
+
+Keep specified product behavior in the requirements and source evidence. Record
+supported technical choices in the approach without inventing a human decision
+for every implementation choice. Research missing facts; ask for unresolved
+product choices, consequential technical uncertainty, effects outside the
+assignment or explicitly requested manual architecture review. Planning-only
+assignments remain planning-only. The human release gate still applies.
+
 Architecture approval permits build, not release or a claim that proof passed.
 Missing access for a later operation blocks that operation; continue independent
 authorized work. Resolve release-critical access before requesting the human gate.
