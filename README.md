@@ -25,6 +25,7 @@ files in this repository and use Git to track changes over time.
 | `grilling` | Shared interview procedure | None |
 | `domain-modeling` | Clarify domain terminology and document decisions | Bundled glossary and ADR formats |
 | `redo-agents-api` | Inspect and manage Redo Agents through its authenticated HTTP API | Local Redo Agents API key |
+| `launchdarkly` | Read, evaluate and update Redo flags through the LaunchDarkly REST API | AWS CLI production profile or exported LaunchDarkly access token |
 | `rmr-engineer` | Run selected RMR tickets locally through architecture, build, proof, Slack review handoff, one human release gate, merge, monitoring and cleanup | Linear/GitLab access, Patch's Slack bot connection or token file, and the product checkout's engineering skills |
 
 Start a task with `Use RMR Engineer to work on RMR-123`, or continue it with
