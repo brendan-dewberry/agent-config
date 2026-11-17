@@ -49,11 +49,16 @@ their glossary and ADR references to this personal documentation root.
 
 ## Redo Development Workflow
 
-When Brendan explicitly selects the local RMR Engineer workflow, load
-[rmr-engineer](/Users/brendan/.agents/skills/rmr-engineer/SKILL.md).
-Its scoped architecture, CI and release approval policy takes precedence over
-the personal workflow's separate routine permission gates for that task.
-Preserve repository requirements, the code owner and the selected environment.
+Use [rmr-engineer](/Users/brendan/.agents/skills/rmr-engineer/SKILL.md) by default
+for Redo product-development planning and implementation, including bug fixes.
+Its automatic architecture review, scoped validation, CI preparation and one
+human release gate replace the personal workflow's separate routine permission
+gates. Do not ask Brendan to select it for each new chat.
+
+Select the task type first. Investigations, data maintenance and manage scripts,
+instructions/configuration, and other explicitly selected or already established
+workflows keep their own paths. Preserve an existing task's workflow, approvals,
+repository requirements, code owner and selected environment on continuation.
 
 For Redo tasks in either local checkout, read and follow
 [Brendan's agentic development workflow](/Users/brendan/.agents/workflows/redo-development.md).

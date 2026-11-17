@@ -26,10 +26,13 @@ files in this repository and use Git to track changes over time.
 | `domain-modeling` | Clarify domain terminology and document decisions | Bundled glossary and ADR formats |
 | `redo-agents-api` | Inspect and manage Redo Agents through its authenticated HTTP API | Local Redo Agents API key |
 | `launchdarkly` | Read, evaluate and update Redo flags through the LaunchDarkly REST API | AWS CLI production profile or exported LaunchDarkly access token |
-| `rmr-engineer` | Run selected RMR tickets locally through architecture, build, proof, Slack review handoff, one human release gate, merge, monitoring and cleanup | Linear/GitLab access, Patch's Slack bot connection or token file, and the product checkout's engineering skills |
+| `rmr-engineer` | Default Redo product-development workflow, with scoped proof and one human release gate | Linear/GitLab access, Patch's Slack bot connection or token file, and the product checkout's engineering skills |
 
-Start a task with `Use RMR Engineer to work on RMR-123`, or continue it with
-`Use RMR Engineer to resume RMR-123`. This is an opt-in local Codex workflow.
+New Redo product-development chats use RMR Engineer by default. Investigations,
+data maintenance, manage scripts and instructions/configuration keep their own
+paths. Explicitly selected workflows and established tasks retain their workflow.
+You can also start with `Use RMR Engineer to work on RMR-123`, or continue with
+`Use RMR Engineer to resume RMR-123`.
 Its task plan stays with local task output; the reusable policy stays here.
 It proceeds through architecture, implementation and CI preparation, then
 waits for approval of the proven candidate and its release plan. Helm and
@@ -105,8 +108,8 @@ builds, types, lint, generation and application tests run in Cloud. Choose
 Cloud checks without a full app stack or Cloud runtime proof using the script,
 services or UI required by the change. Local read-only Waypoint queries can
 provide required database evidence through an existing approved client.
-Product changes retain architecture review; explicitly selected RMR Engineer
-tickets retain their own release policy. Production data writes still require
+Product changes default to RMR Engineer's automatic architecture review and
+single human release gate. Production data writes still require
 authorization for the specific repair.
 
 For example, "Use data maintenance to backfill this existing field" selects

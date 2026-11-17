@@ -1,13 +1,15 @@
 ---
 name: rmr-engineer
-description: Runs or resumes a manually selected RMR ticket through architecture, implementation, proof, human release approval, merge, monitoring and cleanup using local Codex and existing engineering tools. Use when Brendan explicitly selects the local RMR Engineer workflow.
-disable-model-invocation: true
+description: Default workflow for new Redo product-development work, including bug fixes. Runs architecture, implementation, scoped proof, human release approval, merge, monitoring and cleanup. Also resumes explicitly selected RMR Engineer tasks. Investigations, manage scripts, data maintenance, instructions/configuration and other selected or established workflows keep their own paths.
 ---
 
 # RMR Engineer
 
-Use this workflow when the user selects it for a ticket or continues a task
-already using it. Codex owns the implementation and lifecycle. Read
+Use this workflow by default for new Redo product-development work, when the
+user selects it, or when continuing a task already using it. Keep investigations,
+manage scripts, data maintenance and instructions/configuration on their separate
+paths. Honor another explicitly selected or already established workflow.
+Codex owns the implementation and lifecycle. Read
 [the lifecycle](references/lifecycle.md) at entry and resume. Start the record
 from [the task template](assets/task-plan.md).
 
@@ -65,7 +67,7 @@ Managed bot credentials may require a supported local connection or a separately
 authorized credential. Do not export protected server credentials or broaden
 access as an implementation shortcut.
 
-## Authority for this opt-in workflow
+## Authority for this workflow
 
 The implementation assignment authorizes research, automatic architecture review,
 scoped coding/repairs, validation, commits/pushes, a draft MR, review-thread

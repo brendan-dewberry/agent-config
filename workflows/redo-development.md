@@ -1,6 +1,6 @@
 # Brendan's agentic development workflow
 
-Personal workflow, agreed October 3 and updated November 10, 2026.
+Personal workflow, agreed October 3 and updated November 17, 2026.
 This canonical document is versioned in Brendan's private `agent-config`
 repository and applies to both Redo checkouts. It is installed at
 `$HOME/.agents/workflows/redo-development.md`. The previous Redo-local path is
@@ -23,9 +23,9 @@ still apply.
 | --- | --- | --- |
 | Investigation | Diagnose behavior, query data, explain a failure or produce a candidate report | Read-only investigation below |
 | Data maintenance | Data cleanup, backfills, repairs and manage scripts using existing schemas and domain operations | Data maintenance below |
-| Product development | Change ongoing application behavior, APIs, UI, schemas or infrastructure | Product development workflow below |
+| Product development | Change ongoing application behavior, APIs, UI, schemas or infrastructure | Local RMR Engineer by default, with the product-development rules below |
 | Instructions and configuration | Personal workflows, skills, docs and agent configuration | Edit locally and check the changed instructions or configuration |
-| Local RMR Engineer | A ticket explicitly assigned to that workflow | The opt-in RMR Engineer policy below |
+| Explicit or established workflow | A task with another selected workflow or an existing workflow on continuation | Preserve that workflow and its scoped authorization |
 
 Classify by the effect, not the file extension or the ticket label. A manage
 script does not require the product-development path merely because it is
@@ -33,7 +33,10 @@ TypeScript in the product repository. A new recurring scheduler, production
 endpoint, schema migration or change to shared application behavior does.
 Separate a mixed task into scoped parts and apply the appropriate path to each.
 An investigation that finds a product bug can finish its diagnosis before
-starting the product change.
+starting the product change. New Redo product-development work uses local RMR
+Engineer automatically. Do not route investigations, data maintenance, manage
+scripts or instructions/configuration through that lifecycle. Honor another
+explicitly selected workflow and preserve an existing task's established path.
 
 ### Investigation
 
@@ -207,21 +210,27 @@ The rest of this document applies to product development and its cloud
 validation. It does not impose those stages on investigation, data
 maintenance, or instructions/configuration tasks selected above.
 
-### Opt-in local RMR Engineer
+### Default local RMR Engineer
 
-For tasks explicitly assigned to the local RMR Engineer workflow, use
+For new Redo product-development tasks, use
 `$HOME/.agents/skills/rmr-engineer/SKILL.md` and its lifecycle reference.
+This is the default; Brendan does not need to invoke it in each chat. Another
+explicitly selected workflow or an existing task's established workflow takes
+precedence. Investigations, data maintenance, manage scripts and
+instructions/configuration retain their separate task-type paths above.
 That workflow permits automatic architecture review and routine CI preparation,
 then requires one human approval of the proven candidate and its release plan.
 The automatic architecture path includes features with sourced requirements,
 a supported approach and no unresolved product choice or consequential technical
 uncertainty. Record the evidence and verdict. Honor explicit manual-review and
-planning-only requests; this does not change the default workflow for other tasks.
+planning-only requests.
 It defines the authorized merge, rollout, monitoring and mechanical cleanup.
 These scoped rules replace the separate routine permission gates below for
 that task. Mandatory provider reviews, explicit restrictions, checkout safety,
 environment choices and code-owner/validation-helper roles still apply.
-Other product-development tasks continue to use the default workflow below.
+The supporting rules below apply within the selected workflow. Separate routine
+plan, behavior and CI permission gates below do not apply to RMR Engineer tasks;
+use its single human release gate after the required proof and checks instead.
 
 Use the active task worktree's repository-managed
 `cloud-buddy` skill at `.agents/skills/cloud-buddy/SKILL.md` for local
@@ -255,9 +264,11 @@ and append the shared Cursor-agent runbook as the skill instructs. Git does not
 carry ignored files or the local conversation into worktrees or cloud agents
 automatically. Do not depend on cloud-delegate's overlay or brief generator.
 
-- Create the standalone HTML architecture plan and get Brendan's approval
-  before implementing. Update that same walkthrough for implementation review.
-  Existing approvals count; do not request them again for unchanged scope.
+- Create the standalone HTML architecture plan and apply the selected workflow's
+  review policy. RMR Engineer uses automatic architecture review when its
+  criteria pass; ask only for unresolved choices or requested manual review.
+  Update the same walkthrough for implementation review. Existing approvals
+  count; do not request them again for unchanged scope.
 - Codex is the only code owner. Cursor reports failures and returns generated,
   formatting, or service-unblock fixes as patches for local review and commit.
   It does not commit or push application changes, even mechanical fixes, or
@@ -273,8 +284,9 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
   substitute seeded data and call the original acceptance criterion passed.
 - Provide the selected proof for behavior review and inspect the final diff
   and affected callers. Use a hands-on demo when the change needs one.
-  Plan approval, behavior approval, and "done" do not authorize heavy CI gates,
-  merge, deployment, or production writes.
+  RMR Engineer authorizes routine CI preparation after scoped checks pass.
+  Merge, deployment and production writes require the applicable human release
+  approval or separate authorization for their actual effects.
 - Return screenshots or a short demo recording for visible UI changes. For
   script/backend proof, return commands, output and relevant database readback.
   Include the tested SHA, runtime, fixtures and steps. Codex inspects the
@@ -287,7 +299,8 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
 1. **Investigate and plan.** Read current source, relevant docs, existing reuse,
    and selected validation playbooks. Establish intended behavior, scope,
    meaningful failure cases, validation depth and exact required proof.
-   Produce the HTML plan and obtain approval before implementation.
+   Produce the HTML plan and apply the selected workflow's architecture policy.
+   Under RMR Engineer, record the automated verdict and proceed when it passes.
 2. **Implement locally.** Use one task branch/worktree and one code owner.
    Record the path, base SHA, branch, and owner. Write code and regression
    coverage, review the complete diff, and commit only intended changes.
@@ -297,26 +310,29 @@ automatically. Do not depend on cloud-delegate's overlay or brief generator.
    Name the validation depth, runtime, affected packages, expected behavior and
    standing checks. Use the skill's `scripts/buddy.sh push` command subject to
    the shared-branch rules below, then create the draft immediately. Do not
-   enable heavy CI.
+   enable heavy CI until the scoped Cloud checks pass.
 4. **Iterate with Cursor.** Reuse the same buddy and runtime. After every push,
    have it fetch the exact candidate SHA and run the standing checks. Send
    additional questions through the shared followup helper and re-arm the
    watcher. Complete the selected proof and independently inspect the returned
    evidence. Apply suggested patches locally and push completed batches.
-5. **Approve behavior and review implementation.** Provide proof and reproduction
+5. **Prove behavior and review implementation.** Provide proof and reproduction
    steps for Brendan, with verified access links when a live demo is needed.
    Attach validation evidence directly to the MR.
    Update the same HTML walkthrough with actual code, deviations, evidence,
    and gaps. Fix findings and revalidate affected paths.
-6. **Complete final cloud checks when Brendan says done.** Use the same buddy
+6. **Complete final cloud checks.** Use the same buddy
    for any remaining touched-package type checks, lint, generation, regression
    proof, and required tests. Cursor returns patches under the personal
    code-owner rule; Codex reviews, commits, and sends the resulting SHA back for
    checks. Every required check must pass on the final candidate.
-7. **Finish deliberately.** Human approval is still required for ready state,
-   `ready-for-ci`, starting a pipeline, merge/auto-merge, and deployment. Verify
-   final evidence before requesting those actions. Shared skill/playbook changes
-   need their own authorized MR; memory-folder updates need an explicit request.
+7. **Prepare the release decision.** Under RMR Engineer, complete routine ready
+   state and CI preparation, then request approval of the proven candidate and
+   its release, observation and cleanup plan. Merge/auto-merge and deployment
+   follow that approval and mandatory provider reviews. Other explicitly selected
+   or established workflows retain their permission rules. Shared skill/playbook
+   changes need their own authorized MR; memory-folder updates need an explicit
+   request.
 
 Run the buddy's standing checks on each pushed candidate, including relevant
 builds, lint, types, regression coverage and the selected runtime proof. Keep
