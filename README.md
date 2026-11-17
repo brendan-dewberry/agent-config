@@ -7,6 +7,8 @@ files in this repository and use Git to track changes over time.
 
 - `instructions/AGENTS.md`: shared personal instructions, initially copied from
   the existing Codex configuration.
+- `instructions/redo.md`: personal Redo instructions installed as
+  `AGENTS.local.md` in the local Redo checkout.
 - `workflows/redo-development.md`: canonical personal Redo development workflow.
 - `skills/`: reusable skills. Each imported skill includes its source and
   license so upstream updates can be reviewed deliberately.
@@ -26,7 +28,15 @@ files in this repository and use Git to track changes over time.
 | `domain-modeling` | Clarify domain terminology and document decisions | Bundled glossary and ADR formats |
 | `redo-agents-api` | Inspect and manage Redo Agents through its authenticated HTTP API | Local Redo Agents API key |
 | `launchdarkly` | Read, evaluate and update Redo flags through the LaunchDarkly REST API | AWS CLI production profile or exported LaunchDarkly access token |
+| `orchestrator` | Coordinate shared planning, delegated work, integration and completion | Host agent tools; chat tools when separate chats are requested |
 | `rmr-engineer` | Default Redo product-development workflow, with scoped proof and one human release gate | Linear/GitLab access, Patch's Slack bot connection or token file, and the product checkout's engineering skills |
+
+Use `Use an orchestrator for this task`, `Act as the orchestrator for these
+chats`, or `$orchestrator` to select the orchestration workflow. The orchestrator
+owns the combined plan and collects results; delegates plan and execute their
+assigned areas. Native subagents are the default for bounded work. Separate
+chats are used for independent workstream ownership when requested. Conceptual
+questions about orchestration do not activate the workflow.
 
 New Redo product-development chats use RMR Engineer by default. Investigations,
 data maintenance, manage scripts and instructions/configuration keep their own
@@ -81,6 +91,8 @@ Existing unrelated skills stay in their own directories.
 | `$HOME/.codex/AGENTS.md` | `instructions/AGENTS.md` |
 | `$HOME/.claude/CLAUDE.md` | `instructions/AGENTS.md` |
 | `$HOME/.agents/workflows/redo-development.md` | `workflows/redo-development.md` |
+| `$HOME/Repo/redo/AGENTS.local.md` | `instructions/redo.md`, when Redo is present |
+| `$HOME/Repo/redo/docs/agentic-development-workflow.local.md` | `workflows/redo-development.md`, when Redo is present |
 | `$HOME/.agents/skills/<name>` | `skills/<name>/` |
 | `$HOME/.claude/skills/<name>` | `skills/<name>/` |
 | `$HOME/.cursor/skills/<name>` | `skills/<name>/` |
@@ -90,11 +102,13 @@ Codex discovers skills through `.agents/skills`. Claude and Cursor get their
 own skill links. For Cursor instructions, follow `config/README.md`.
 Start a new chat after changing instructions so the agent loads the new content.
 
-If `$HOME/Repo/redo` is a checkout, the installer also links its existing
-`docs/agentic-development-workflow.local.md` path to the canonical workflow. It
-ensures that path is locally ignored, refuses to replace a tracked file, and
-preserves an existing local file when `--backup` is supplied. If Redo is absent,
-it only installs the shared workflow under `.agents/workflows`.
+If `$HOME/Repo/redo` is a checkout, the installer links `AGENTS.local.md` to
+`instructions/redo.md` and `docs/agentic-development-workflow.local.md` to the
+canonical workflow. It ensures both paths are locally ignored, refuses to
+replace tracked files, and preserves existing local files when `--backup` is
+supplied. Edit the linked sources here to keep the local Redo instructions
+and this repository in sync. If Redo is absent, the installer skips these
+checkout-specific links.
 
 Edit `workflows/redo-development.md` here to maintain the workflow. Its
 repository-relative paths refer to the active Redo checkout, so it continues

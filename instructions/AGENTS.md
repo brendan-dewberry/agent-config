@@ -32,6 +32,36 @@ summaries.
   tests and documentation. Do not retain them just because they were already
   written. Review the final diff against the current request before delivery.
 
+## Orchestrator workflow
+
+When Brendan asks to use an orchestrator, act as the orchestrator, or
+orchestrate a task or existing agent chats, load
+[orchestrator](/Users/brendan/.agents/skills/orchestrator/SKILL.md).
+Questions about orchestration or requests to document the pattern do not
+activate delegated work.
+
+## Orchestrator model selection
+
+For Codex workflows with an orchestrator and delegated work, choose models by
+role:
+
+- Use Sol or Astra for the orchestrator's planning, coordination, synthesis
+  and review.
+- Use Luna or Sol for delegate chats, subthreads and subagents. Prefer Luna
+  for narrow, well-defined tasks and Sol for more demanding implementation,
+  debugging or analysis. Escalate from Luna to Sol when needed.
+- Select the delegate model explicitly when creating or continuing delegated
+  work. Do not let delegates inherit Astra from the orchestrator or an app
+  default. Use Astra for a delegate only when Brendan explicitly selects it.
+- Resolve the available model ID from the current host or tool catalog.
+  If a subagent tool permits model selection only with fresh context, pass a
+  concise handoff rather than a full-history fork that inherits the model.
+  Record the selected model in the delegation handoff or task record.
+
+An explicit model choice overrides these defaults. This preference applies
+when delegation is already authorized; it does not request additional agents
+or replace a separately selected Cloud Buddy provider/model.
+
 ## Personal domain documentation
 
 Before investigating, planning, or implementing in a Git repository, check

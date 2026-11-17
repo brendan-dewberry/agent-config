@@ -11,8 +11,8 @@ usage() {
 Usage: ./install.sh [--dry-run] [--backup] [--target DIRECTORY]
 
 Create links for shared instructions, workflows, skills, and executable scripts.
-If TARGET/Repo/redo is a checkout, also link and locally exclude its legacy
-workflow path.
+If TARGET/Repo/redo is a checkout, also link and locally exclude its personal
+instructions and legacy workflow paths.
 Existing files cause installation to stop unless --backup is supplied.
 --dry-run prints the plan without changing files.
 --target installs into another home directory, useful for a preview or test.
@@ -52,19 +52,25 @@ add_link "$repo_dir/instructions/AGENTS.md" .claude/CLAUDE.md
 add_link "$repo_dir/workflows/redo-development.md" .agents/workflows/redo-development.md
 
 redo_checkout="$target_dir/Repo/redo"
-redo_workflow=docs/agentic-development-workflow.local.md
-redo_exclude=
+redo_paths=(docs/agentic-development-workflow.local.md AGENTS.local.md)
+redo_sources=("$repo_dir/workflows/redo-development.md" "$repo_dir/instructions/redo.md")
+redo_exclude_paths=()
+redo_exclude_file=
 if [[ -e "$redo_checkout/.git" ]]; then
-  if git -C "$redo_checkout" ls-files --error-unmatch -- "$redo_workflow" >/dev/null 2>&1; then
-    printf 'Refusing to replace tracked workflow: %s/%s\n' "$redo_checkout" "$redo_workflow" >&2
-    exit 1
-  fi
-  if ! git -C "$redo_checkout" check-ignore -q -- "$redo_workflow"; then
-    redo_exclude=$(git -C "$redo_checkout" rev-parse --git-path info/exclude)
-    if [[ "$redo_exclude" != /* ]]; then redo_exclude="$redo_checkout/$redo_exclude"; fi
-    printf 'Locally exclude: %s in %s\n' "$redo_workflow" "$redo_exclude"
-  fi
-  add_link "$repo_dir/workflows/redo-development.md" "Repo/redo/$redo_workflow"
+  for i in "${!redo_paths[@]}"; do
+    redo_path=${redo_paths[$i]}
+    if git -C "$redo_checkout" ls-files --error-unmatch -- "$redo_path" >/dev/null 2>&1; then
+      printf 'Refusing to replace tracked file: %s/%s\n' "$redo_checkout" "$redo_path" >&2
+      exit 1
+    fi
+    if ! git -C "$redo_checkout" check-ignore -q -- "$redo_path"; then
+      redo_exclude_file=$(git -C "$redo_checkout" rev-parse --git-path info/exclude)
+      if [[ "$redo_exclude_file" != /* ]]; then redo_exclude_file="$redo_checkout/$redo_exclude_file"; fi
+      printf 'Locally exclude: %s in %s\n' "$redo_path" "$redo_exclude_file"
+      redo_exclude_paths+=("$redo_path")
+    fi
+    add_link "${redo_sources[$i]}" "Repo/redo/$redo_path"
+  done
 fi
 
 for skill_dir in "$repo_dir"/skills/*; do
@@ -115,9 +121,12 @@ done
 if "$conflicts"; then exit 1; fi
 if "$dry_run"; then exit 0; fi
 
-if [[ -n "$redo_exclude" ]]; then
-  mkdir -p -- "$(dirname -- "$redo_exclude")"
-  printf '\n# Personal Redo workflow\n/docs/agentic-development-workflow.local.md\n' >> "$redo_exclude"
+if ((${#redo_exclude_paths[@]})); then
+  mkdir -p -- "$(dirname -- "$redo_exclude_file")"
+  {
+    printf '\n# Personal Redo configuration\n'
+    printf '/%s\n' "${redo_exclude_paths[@]}"
+  } >> "$redo_exclude_file"
 fi
 
 backup_dir=

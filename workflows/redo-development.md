@@ -8,6 +8,15 @@ an ignored symlink to this file.
 
 Resolve repository-relative paths below from the active Redo checkout.
 
+## Orchestrator model selection
+
+Follow the [shared model-selection rule](/Users/brendan/.agents/AGENTS.md#orchestrator-model-selection)
+when using Codex as an orchestrator. Use Sol or Astra for the orchestrator,
+and explicitly choose Luna or Sol for delegate chats, subthreads and subagents.
+Prefer Luna for narrow tasks and Sol for more demanding work. Do not inherit
+the orchestrator's Astra model or leave delegate selection to the app default.
+Preserve explicit model choices and the selected Cloud Buddy provider/model.
+
 ## Choose the task type first
 
 Select the path from the requested outcome before applying architecture,
