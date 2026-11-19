@@ -22,6 +22,7 @@ files in this repository and use Git to track changes over time.
 | Skill | Purpose | Dependencies |
 | --- | --- | --- |
 | `unslop` | Remove AI writing patterns from prose | None |
+| `reflect` | Turn lessons from a conversation into proposed skill edits | None |
 | `grill-me` | Interview you to sharpen a plan or design | `grilling` |
 | `grill-with-docs` | Interview you while capturing glossary terms and architectural decisions | `grilling`, `domain-modeling` |
 | `grilling` | Shared interview procedure | None |
